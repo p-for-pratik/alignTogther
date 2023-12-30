@@ -15,52 +15,58 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.model.Todo;
-
-import com.example.demo.service.TodoService;
-
+import com.example.demo.model.Card;
+import com.example.demo.service.CardService;
 
 @RestController
 @RequestMapping("/todo")
 public class MyController {
- TodoService todoService;
+ CardService cardService;
 
-public MyController(TodoService todoService) {
+public MyController(CardService cardService) {
 
-	this.todoService = todoService;
+	this.cardService = cardService;
 }
 
 @PostMapping
-public Todo createUserData(@RequestBody Todo todo) 
+public Card createUserData(@RequestBody Card card) 
 {
-//	System.out.println("pppppppp");
+	System.out.println("pppppppp");
 
-	todoService.createTodo(todo);
-	return todo;
+	cardService.createCard(card);
+	return card;
 }
 @GetMapping("/all")
-public List<Todo> getAllTodoData() 
+public List<Card> getAllCardData() 
 {
-//	System.out.println("hiii");
+	System.out.println("hiii");
 
 	
-	return todoService.getAllTodo();
+	return cardService.getAllCard();
 	
 }
-@GetMapping("{todo_id}")
-public Todo GetUserData(@PathVariable("todo_id") String todo_id) 
+@GetMapping("/")
+public List<Card> getAllCard() 
 {
+	System.out.println("hiii");
 
-	return todoService.getTodo(todo_id);
+	
+	return cardService.getAllCard();
 	
 }
+//@GetMapping("{todo_id}")
+//public Todo GetUserData(@PathVariable("todo_id") String todo_id) 
+//{
+//
+//	return todoService.getTodo(todo_id);
+//	
+//}
 
 @DeleteMapping("{id}")
-public String deleteUserData(@PathVariable("id") String id) 
+public String deleteCardData(@PathVariable("id") Integer id) 
 {
-
-	todoService.deleteUser(id);
+	
+	cardService.deleteCard(id);
 	return "deleted";
 }
 
